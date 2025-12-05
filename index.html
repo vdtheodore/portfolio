@@ -14,18 +14,17 @@
     html{scroll-behavior:smooth}
     body{font-family:Inter,system-ui,Segoe UI,Arial;background:linear-gradient(180deg,#05060a 0%, #0b1016 70%);color:#e7eef6;margin:0;line-height:1.5}
 
+    /* Scrollbar styling */
     ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.10); }
-
     * { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.06) transparent; }
 
     header{position:sticky;top:0;z-index:50;background:rgba(11,13,16,0.78);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
     .container{max-width:var(--max-w);margin:0 auto;padding:20px}
     .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#55627a);display:flex;align-items:center;justify-content:center;font-weight:700;color:#071018;font-size:1.05rem;box-shadow:0 4px 14px rgba(7,10,14,0.6)}
     .title{display:flex;flex-direction:column}
     .name{font-weight:700;margin:0}
     .sub{font-size:0.85rem;color:var(--muted);margin-top:2px}
@@ -46,54 +45,32 @@
     .projects{margin-top:24px;display:grid;gap:18px}
     .project{display:grid;grid-template-columns:1fr 260px;gap:16px;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
     .project h3{margin:0}
-    .table-wrap{overflow:auto;border-radius:8px}
-    
-    th,td{padding:8px;border:1px solid rgba(255,255,255,0.03);text-align:left;word-wrap:break-word}
+    .table-wrap{overflow-x:auto;overflow-y:hidden;border-radius:8px;-webkit-overflow-scrolling:touch;padding-bottom:6px} 
+
+    table{width:100%;border-collapse:collapse;margin-top:8px;font-size:0.95rem;min-width:720px}
+    th,td{padding:10px;border:1px solid rgba(255,255,255,0.03);text-align:left;white-space:normal;word-break:break-word}
+
+    /* 3D modeling thumbnails */
+    .model-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .model-thumb{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;cursor:pointer;display:block;border:1px solid rgba(255,255,255,0.03);box-shadow:0 6px 18px rgba(2,6,10,0.6);transition:transform .12s ease, box-shadow .12s ease}
+    .model-thumb:hover{transform:scale(1.03)}
 
     .skills{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
     .skill{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);width:110px;position:relative}
     .skill img{width:48px;height:48px;object-fit:contain}
     .skill small{color:var(--muted);font-weight:600}
 
-    .skill .tooltip{
-      position:absolute;
-      bottom:calc(100% + 10px);
-      left:50%;
-      transform:translateX(-50%) translateY(6px);
-      opacity:0;
-      visibility:hidden;
-      transition:opacity .18s ease, transform .18s ease;
-      background:var(--panel);
-      padding:12px;
-      border-radius:10px;
-      width:240px;
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow:0 6px 20px rgba(2,6,10,0.6);
-      color:#e7eef6;
-      font-size:0.86rem;
-      text-align:left;
-      z-index:30;
-    }
-    .skill:hover .tooltip, .skill:focus-within .tooltip {
-      opacity:1;
-      visibility:visible;
-      transform:translateX(-50%) translateY(0);
-    }
-    .skill .tooltip::after{
-      content:'';
-      position:absolute;
-      top:100%;
-      left:50%;
-      transform:translateX(-50%);
-      border-width:8px;
-      border-style:solid;
-      border-color: var(--panel) transparent transparent transparent;
-    }
-    .tooltip strong{display:block;margin-bottom:6px;font-weight:700}
-    .tooltip ul{margin:0;padding-left:18px}
-    .tooltip li{margin-bottom:4px;color:var(--muted);font-size:0.86rem}
+    .skill .tooltip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(6px);opacity:0;visibility:hidden;transition:opacity .18s ease, transform .18s ease;background:var(--panel);padding:12px;border-radius:10px;width:240px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 6px 20px rgba(2,6,10,0.6);color:#e7eef6;font-size:0.86rem;text-align:left;z-index:30}
+    .skill:hover .tooltip, .skill:focus-within .tooltip {opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+    .skill .tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border-width:8px;border-style:solid;border-color: var(--panel) transparent transparent transparent}
 
     .contact-card{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,10,0.85);visibility:hidden;opacity:0;transition:opacity .18s ease;z-index:1200;padding:20px}
+    .lightbox.open{visibility:visible;opacity:1}
+    .lightbox img{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.7)}
+    .lightbox .close{position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.04);border-radius:8px;padding:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.06)}
 
     footer{max-width:var(--max-w);margin:28px auto 60px auto;padding:14px;color:var(--muted);text-align:center}
 
@@ -101,7 +78,7 @@
       .hero{grid-template-columns:1fr}
       .project{grid-template-columns:1fr}
       nav{gap:6px}
-      .skills{justify-content:flex-start}
+      .model-grid{grid-template-columns:1fr}
       .skill{width:100px}
       .skill .tooltip{left:50%; transform:translateX(-50%); width:200px}
     }
@@ -114,7 +91,7 @@
         <div class="brand">
           <div class="title">
             <div class="name">Theodore Van Duyne</div>
-            <div class="sub">Little Miami High School • Class of 2028 • Aspiring microprocessor engineer</div>
+            <div class="sub">Little Miami High School • Class of 2029 • Aspiring microprocessor engineer</div>
           </div>
         </div>
         <nav>
@@ -189,11 +166,36 @@
 
           <div class="panel" style="text-align:left">
             <h4 style="margin-top:0">Prototype notes</h4>
-            <p class="meta">No photos were taken. Prototype materials included poster board, cardboard, and tape. The cork launcher gave consistent energy once we adjusted the stopper height. Reinforcing the base removed wobble and made the game feel solid for players.</p>
+            <p class="meta">Prototype materials included poster board, cardboard, and tape. The cork launcher gave consistent energy once we adjusted the stopper height. Reinforcing the base removed wobble and made the game feel solid for players.</p>
           </div>
         </aside>
       </div>
 
+    </section>
+
+    <section id="modeling" class="container" style="margin-top:30px">
+      <div class="panel">
+        <h3>3D Modeling Work</h3>
+        <p class="meta">A small selection of 3D models I designed. Images are stored in the assets folder.</p>
+
+        <div class="model-grid">
+          <div class="panel" style="padding:12px">
+            <h4 style="margin-top:0">Backpack Charm</h4>
+            <img class="model-thumb" src="assets/backpackcharm.png" alt="Backpack Charm" data-full="assets/backpackcharm.png">
+            <p class="meta" style="margin-top:8px">For the backpack charm I started with a 2D vector outline and imported it into my CAD software as a sketch. Turning the vector into a 3D model required cleaning the curves, creating proper closed profiles, and using extrusion and fillets to get the charm shape. Importing the vector saved time on the initial shape but required careful scaling and alignment so the charm printed at the right size.</p>
+            <p class="meta">Lessons learned: how to prepare and clean vector art for CAD imports, how to control scale and export STL settings for 3D printing.</p>
+          </div>
+
+          <div class="panel" style="padding:12px">
+            <h4 style="margin-top:0">Clock Mechanism</h4>
+            <img class="model-thumb" src="assets/clockmechanism.png" alt="Clock Mechanism" data-full="assets/clockmechanism.png">
+            <p class="meta" style="margin-top:8px">The clock mechanism was a more technical model where I designed gears, shafts, and housing. This project taught me a lot about mirroring extrusions, constraining mates, and thinking about tolerances between moving parts so the gears would mesh properly after printing.</p>
+            <p class="meta">Lessons learned: designing for assembly, using mirrored features to keep parts symmetric, and planning tolerances for 3D-printed moving components.</p>
+          </div>
+        </div>
+
+        <p style="margin-top:12px;color:var(--muted)"></p>
+      </div>
     </section>
 
     <section id="skills" class="container" style="margin-top:30px">
@@ -291,8 +293,52 @@
     © <span id="year">2025</span> Theodore Van Duyne, Little Miami High School
   </footer>
 
+  <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+    <button class="close" aria-label="Close">✕</button>
+    <img src="" alt="" />
+  </div>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Lightbox behavior for model thumbnails and skill icon click handling
+    (function(){
+      const lightbox = document.getElementById('lightbox');
+      const lbImg = lightbox.querySelector('img');
+      const closeBtn = lightbox.querySelector('.close');
+
+      function open(src, alt){
+        lbImg.src = src;
+        lbImg.alt = alt || '';
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      }
+      function close(){
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden','true');
+        lbImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.model-thumb').forEach(img=>{
+        img.addEventListener('click', ()=> open(img.getAttribute('data-full')||img.src, img.alt));
+        img.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') open(img.getAttribute('data-full')||img.src, img.alt); });
+      });
+
+      closeBtn.addEventListener('click', close);
+      lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox) close(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+
+      // When clicking on a skill icon, remove focus from the .skill container so the tooltip does not stay visible.
+      document.querySelectorAll('.skill img').forEach(img => {
+        img.addEventListener('click', () => {
+          const parent = img.closest('.skill');
+          if (parent && typeof parent.blur === 'function') parent.blur();
+          else if (document.activeElement && typeof document.activeElement.blur === 'function') document.activeElement.blur();
+        });
+      });
+    })();
   </script>
 </body>
 </html>
