@@ -4,80 +4,350 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Theodore Van Duyne — Engineering Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0f14; --panel:#0f161b; --muted:#94a3b8; --accent:#6b8b88; --glass:rgba(255,255,255,0.04);
+      --bg:#0f1216;
+      --bg-2:#14181d;
+      --panel:#171c22;
+      --panel-2:#1b2128;
+      --text:#e9eef4;
+      --muted:#a3adbb;
+      --accent:#9a8f7a;
+      --accent-2:#6f8a83;
+      --border:rgba(255,255,255,0.08);
+      --border-soft:rgba(255,255,255,0.05);
+      --shadow:0 18px 45px rgba(0,0,0,0.35);
+      --shadow-soft:0 10px 24px rgba(0,0,0,0.22);
+      --radius:18px;
       --max-w:1100px;
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{font-family:Inter,system-ui,Segoe UI,Arial;background:linear-gradient(180deg,#05060a 0%, #0b1016 70%);color:#e7eef6;margin:0;line-height:1.5}
+    body{
+      margin:0;
+      color:var(--text);
+      line-height:1.6;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(154,143,122,0.13), transparent 24%),
+        radial-gradient(circle at top right, rgba(111,138,131,0.12), transparent 20%),
+        linear-gradient(180deg, #0b0e12 0%, #11161b 45%, #0f1216 100%);
+    }
 
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.10); }
-    * { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.06) transparent; }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size:56px 56px;
+      opacity:0.15;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,0.55), transparent 92%);
+    }
 
-    header{position:sticky;top:0;z-index:50;background:rgba(11,13,16,0.78);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
-    .container{max-width:var(--max-w);margin:0 auto;padding:20px}
-    .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .title{display:flex;flex-direction:column}
-    .name{font-weight:700;margin:0}
-    .sub{font-size:0.85rem;color:var(--muted);margin-top:2px}
+    ::-webkit-scrollbar{width:10px;height:10px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:999px;border:2px solid transparent;background-clip:padding-box}
+    ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.17);border:2px solid transparent;background-clip:padding-box}
+    *{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.1) transparent}
 
-    nav{display:flex;gap:8px}
-    .nav-btn{background:var(--panel);padding:8px 12px;border-radius:10px;color:inherit;text-decoration:none;font-weight:600;border:1px solid rgba(255,255,255,0.02)}
-    .nav-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+    a{color:#d7d0c2;text-decoration:none}
+    a:hover{text-decoration:underline}
 
-    main{max-width:var(--max-w);margin:34px auto;padding:20px}
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(12,15,19,0.75);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,0.05);
+    }
 
-    .hero{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
-    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .lead{color:var(--muted);margin-top:8px}
+    .container{max-width:var(--max-w);margin:0 auto;padding:18px 20px}
 
-    h2{margin:0 0 12px 0}
-    .meta{color:var(--muted);font-size:0.95rem}
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
 
-    .projects{margin-top:24px;display:grid;gap:18px}
-    .project{display:grid;grid-template-columns:1fr 260px;gap:16px;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
-    .project h3{margin:0}
-    .table-wrap{overflow-x:auto;overflow-y:hidden;border-radius:8px;-webkit-overflow-scrolling:touch;padding-bottom:6px} 
+    .brand{display:flex;align-items:center;gap:14px;min-width:240px}
+    .title{display:flex;flex-direction:column;gap:3px}
+    .name{font-weight:800;letter-spacing:-0.03em;font-size:1.05rem}
+    .sub{font-size:0.86rem;color:var(--muted)}
 
-    table{width:100%;border-collapse:collapse;margin-top:8px;font-size:0.95rem;min-width:720px}
-    th,td{padding:10px;border:1px solid rgba(255,255,255,0.03);text-align:left;white-space:normal;word-break:break-word}
+    nav{display:flex;gap:8px;flex-wrap:wrap}
+    .nav-btn{
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      padding:9px 13px;
+      border-radius:999px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 6px 16px rgba(0,0,0,0.15);
+      transition:transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .nav-btn:hover{
+      transform:translateY(-1px);
+      background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border-color:rgba(255,255,255,0.1);
+      text-decoration:none;
+    }
+
+    main{max-width:var(--max-w);margin:28px auto 0;padding:0 20px 24px}
+
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.5fr) 320px;
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+      border:1px solid var(--border-soft);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-soft);
+      padding:20px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .skills-panel{overflow:visible}
+
+    .panel::after{
+      content:"";
+      position:absolute;
+      inset:auto -20% -40% auto;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle, rgba(154,143,122,0.08), transparent 65%);
+      pointer-events:none;
+    }
+
+    .panel + .panel{margin-top:16px}
+
+    .section-glow{
+      animation:sectionGlowFade 1.3s ease-out;
+    }
+
+    .section-glow > .panel,
+    .section-glow > .project,
+    .section-glow > .project-card{
+      border-color:rgba(154,143,122,0.55) !important;
+      box-shadow:0 0 0 1px rgba(154,143,122,0.25), 0 0 28px rgba(154,143,122,0.28), var(--shadow-soft);
+    }
+
+    @keyframes sectionGlowFade{
+      0%{filter:drop-shadow(0 0 0 rgba(154,143,122,0));}
+      18%{filter:drop-shadow(0 0 16px rgba(154,143,122,0.58));}
+      100%{filter:drop-shadow(0 0 0 rgba(154,143,122,0));}
+    }
+
+    h2,h3,h4{margin:0 0 10px 0;line-height:1.15}
+    h2{font-size:1.55rem;letter-spacing:-0.03em}
+    h3{font-size:1.22rem;letter-spacing:-0.02em}
+    h4{font-size:1rem;letter-spacing:-0.01em}
+
+    .lead{color:#d8dee7;margin:10px 0 0 0;max-width:68ch}
+    .meta{color:var(--muted);font-size:0.96rem}
+
+    section{scroll-margin-top:94px}
+
+    .section-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:0.78rem;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+      color:#bdc6d1;
+      margin-bottom:12px;
+    }
+    .section-label::before{
+      content:"";
+      width:26px;height:1px;background:rgba(255,255,255,0.22)
+    }
+
+    .contact-card{padding:18px}
+
+    .projects{margin-top:22px;display:grid;gap:18px}
+    .project{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 290px;
+      gap:16px;
+      padding:18px;
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border:1px solid rgba(255,255,255,0.05);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .project h3{margin-bottom:8px}
+    .project p{margin-top:0}
+
+    .table-wrap{overflow-x:auto;overflow-y:hidden;border-radius:12px;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      margin-top:8px;
+      font-size:0.95rem;
+      min-width:720px;
+      overflow:hidden;
+      border-radius:12px;
+    }
+    th,td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:left;vertical-align:top;white-space:normal;word-break:break-word}
+    th{background:rgba(255,255,255,0.03);font-size:0.9rem;color:#edf2f7}
+    tbody tr:hover td{background:rgba(255,255,255,0.015)}
+    tbody tr:last-child td{border-bottom:none}
 
     .model-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-    .model-thumb{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;cursor:pointer;display:block;border:1px solid rgba(255,255,255,0.03);box-shadow:0 6px 18px rgba(2,6,10,0.6);transition:transform .12s ease, box-shadow .12s ease}
-    .model-thumb:hover{transform:scale(1.03)}
+    .project-card{
+      border-radius:16px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.05);
+      padding:13px;
+      box-shadow:0 10px 28px rgba(0,0,0,0.18);
+    }
+
+    .model-thumb{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      border-radius:14px;
+      cursor:pointer;
+      display:block;
+      border:1px solid rgba(255,255,255,0.05);
+      box-shadow:0 10px 22px rgba(0,0,0,0.35);
+      transition:transform .16s ease, box-shadow .16s ease;
+      background:rgba(255,255,255,0.02);
+    }
+    .model-thumb:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 14px 30px rgba(0,0,0,0.42)}
 
     .skills{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-    .skill{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);width:110px;position:relative}
-    .skill img{width:48px;height:48px;object-fit:contain}
-    .skill small{color:var(--muted);font-weight:600}
+    .skill{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      padding:13px 12px;
+      border-radius:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.05);
+      width:118px;
+      position:relative;
+      box-shadow:0 10px 18px rgba(0,0,0,0.16);
+      cursor:pointer;
+      outline:none;
+      user-select:none;
+    }
+    .skill img{width:46px;height:46px;object-fit:contain;filter:saturate(0.95)}
+    .skill small{color:#dce2ea;font-weight:700;letter-spacing:0.01em;text-align:center}
 
-    .skill .tooltip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(6px);opacity:0;visibility:hidden;transition:opacity .18s ease, transform .18s ease;background:var(--panel);padding:12px;border-radius:10px;width:240px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 6px 20px rgba(2,6,10,0.6);color:#e7eef6;font-size:0.86rem;text-align:left;z-index:30}
-    .skill:hover .tooltip, .skill:focus-within .tooltip {opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
-    .skill .tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border-width:8px;border-style:solid;border-color: var(--panel) transparent transparent transparent}
+    .skill .tooltip{
+      position:absolute;
+      bottom:calc(100% + 10px);
+      left:50%;
+      transform:translateX(-50%) translateY(8px);
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .18s ease, transform .18s ease;
+      background:var(--panel-2);
+      padding:12px 13px;
+      border-radius:14px;
+      width:245px;
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 14px 28px rgba(0,0,0,0.38);
+      color:var(--text);
+      font-size:0.86rem;
+      text-align:left;
+      z-index:30;
+      pointer-events:none;
+    }
+    .skill:hover .tooltip,
+    .skill:focus-within .tooltip,
+    .skill.open .tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+    .skill .tooltip::after{
+      content:'';
+      position:absolute;
+      top:100%;left:50%;transform:translateX(-50%);
+      border-width:8px;
+      border-style:solid;
+      border-color:var(--panel-2) transparent transparent transparent
+    }
+    .skill ul{margin:8px 0 0 18px;padding:0}
+    .skill li{margin:4px 0}
 
-    .contact-card{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
+    .contact-card p{margin-bottom:0}
 
-    .lightbox{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,10,0.85);visibility:hidden;opacity:0;transition:opacity .18s ease;z-index:1200;padding:20px}
+    .lightbox{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(2,6,10,0.86);
+      visibility:hidden;
+      opacity:0;
+      transition:opacity .18s ease;
+      z-index:1200;
+      padding:20px;
+    }
     .lightbox.open{visibility:visible;opacity:1}
-    .lightbox img{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.7)}
-    .lightbox .close{position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.04);border-radius:8px;padding:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.06)}
+    .lightbox img{max-width:100%;max-height:100%;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,0.75)}
+    .lightbox .close{
+      position:absolute;
+      top:18px;right:18px;
+      background:rgba(255,255,255,0.06);
+      border-radius:999px;
+      padding:10px 12px;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,0.08);
+      color:var(--text);
+    }
 
-    footer{max-width:var(--max-w);margin:28px auto 60px auto;padding:14px;color:var(--muted);text-align:center}
+    footer{
+      max-width:var(--max-w);
+      margin:24px auto 48px auto;
+      padding:10px 20px;
+      color:var(--muted);
+      text-align:center;
+      font-size:0.95rem;
+    }
 
-    @media (max-width:940px){
+    .image-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    .image-row.single{grid-template-columns:1fr}
+
+    @media (max-width: 940px){
       .hero{grid-template-columns:1fr}
       .project{grid-template-columns:1fr}
-      nav{gap:6px}
       .model-grid{grid-template-columns:1fr}
-      .skill{width:100px}
-      .skill .tooltip{left:50%; transform:translateX(-50%); width:200px}
+      .image-row{grid-template-columns:1fr}
+      .skill{width:104px}
+      .skill .tooltip{
+        width:210px;
+        top:calc(100% + 10px);
+        bottom:auto;
+      }
+      .skill .tooltip::after{
+        top:auto;
+        bottom:100%;
+        border-color:transparent transparent var(--panel-2) transparent;
+      }
+    }
+
+    @media (max-width: 640px){
+      .container,main{padding-left:14px;padding-right:14px}
+      .panel,.project{border-radius:16px;padding:16px}
+      .nav-btn{padding:8px 11px;font-size:0.92rem}
+      .name{font-size:1rem}
+      .sub{font-size:0.82rem}
     }
   </style>
 </head>
@@ -93,8 +363,11 @@
         </div>
         <nav>
           <a class="nav-btn" href="#about">About</a>
-          <a class="nav-btn" href="#modeling">Projects</a>
+          <a class="nav-btn" href="#projects">Projects</a>
           <a class="nav-btn" href="#major-projects">Major Projects</a>
+          <a class="nav-btn" href="#automata">Automata</a>
+          <a class="nav-btn" href="#drone">Drone Work</a>
+          <a class="nav-btn" href="#cad-work">3D Modeling Work</a>
           <a class="nav-btn" href="#skills">Skills</a>
           <a class="nav-btn" href="#contact">Contact</a>
         </nav>
@@ -105,6 +378,7 @@
   <main>
     <section id="about" class="container hero">
       <div class="panel">
+        <div class="section-label">Introduction</div>
         <h2>About</h2>
         <p class="lead">Hi, I’m Theodore. This portfolio shows my engineering, coding, and 3-D modeling work, starting with a carnival themed golf game project I built in class.</p>
         <p class="meta" style="margin-top:12px">I'm focused on electronic engineering and I aspire to be a microprocessor engineer. I enjoy solving problems with math and code, and I like building and testing physical circuits and embedded systems.</p>
@@ -114,15 +388,17 @@
       </div>
 
       <aside class="panel contact-card">
+        <div class="section-label">Contact</div>
         <h3 style="margin-top:0">Contact</h3>
         <p class="meta">Email: <a href="mailto:vanduynetheodore@gmail.com">vanduynetheodore@gmail.com</a></p>
-        <p style="margin-top:12px;color:var(--muted)">Want to collaborate or see more details? Email me and include what you want to see.</p>
+        <p class="meta" style="margin-top:12px">Want to collaborate or see more details? Email me and include what you want to see.</p>
       </aside>
     </section>
 
     <section id="projects" class="container projects">
       <div class="project">
         <div>
+          <div class="section-label">Featured project</div>
           <h3>Carnival Golf, Windmill Challenge</h3>
           <p class="meta">Class project. Our team brainstormed three game ideas: an Angry Birds style cork launcher, a Pop-a-Shot style target, and a windmill mini-golf. We picked the windmill game because it was fun, simple to build, and reliable once tuned.</p>
 
@@ -146,7 +422,7 @@
         </div>
 
         <aside>
-          <div class="panel" style="margin-bottom:12px">
+          <div class="panel" style="margin-bottom:12px;padding:16px;border-radius:16px">
             <h4 style="margin:0 0 8px 0">Decision matrix</h4>
             <div class="table-wrap">
               <table>
@@ -162,23 +438,22 @@
             </div>
           </div>
 
-          <div class="panel" style="text-align:left">
+          <div class="panel" style="text-align:left;padding:16px;border-radius:16px">
             <h4 style="margin-top:0">Prototype notes</h4>
             <p class="meta">Prototype materials included poster board, cardboard, and tape. The cork launcher gave consistent energy once we adjusted the stopper height. Reinforcing the base removed wobble and made the game feel solid for players.</p>
           </div>
         </aside>
       </div>
-
     </section>
 
     <section id="major-projects" class="container" style="margin-top:30px">
       <div class="panel">
+        <div class="section-label">Larger work</div>
         <h3>Major Projects</h3>
         <p class="meta">Some of the larger projects I have worked on.</p>
 
         <div class="model-grid">
-
-          <div class="panel" style="padding:12px">
+          <div class="project-card">
             <h4 style="margin-top:0">Custom Clock Model</h4>
             <img class="model-thumb" src="assets/clockmodel.png" alt="Custom clock model" data-full="assets/clockmodel.png">
             <p class="meta" style="margin-top:8px">
@@ -188,7 +463,7 @@
             </p>
           </div>
 
-          <div class="panel" style="padding:12px">
+          <div class="project-card">
             <h4 style="margin-top:0">Balancing Sculpture</h4>
             <img class="model-thumb" src="assets/balancing.png" alt="Balancing sculpture" data-full="assets/balancing.png">
             <p class="meta" style="margin-top:8px">
@@ -197,42 +472,126 @@
               The work reinforced the importance of precise cuts and testing when tuning balance and stability.
             </p>
           </div>
-
         </div>
       </div>
     </section>
 
-    <section id="modeling" class="container" style="margin-top:30px">
+    <section id="automata" class="container" style="margin-top:30px">
       <div class="panel">
+        <div class="section-label">Mechanical Design</div>
+        <h3>Automata Design Challenge</h3>
+        <p class="meta">For this project, I designed and built a hand-cranked automaton that used cams and mechanical linkages to create motion. My design was a bird whose wings moved opposite to the motion of its body, creating a more lifelike and interesting animation.</p>
+
+        <div class="image-row single">
+          <img class="model-thumb" src="assets/birddrawing.png" alt="Bird automata drawing" data-full="assets/birddrawing.png">
+        </div>
+
+        <h4 style="margin-top:14px">Project Goal</h4>
+        <p>
+          The objective was to create a mechanical toy for children ages 5–12 that used rotational motion from a hand crank to drive multiple moving parts. The project required the use of cams, an axle system, and additional mechanisms to translate motion into a short animated scene.
+        </p>
+
+        <h4 style="margin-top:14px">Design Process</h4>
+        <ol>
+          <li><strong>Brainstorming:</strong> I explored several ideas before choosing a bird design because it allowed me to experiment with synchronized but opposite movements.</li>
+          <li><strong>Planning Motion:</strong> I planned the movement so that when the crank rotated, the bird’s body would rise while the wings moved downward. This opposing motion made the automaton feel more dynamic and realistic.</li>
+          <li><strong>Cam Design:</strong> I used multiple cam shapes to create different movement patterns. One cam controlled the vertical motion of the bird’s body while another controlled the wing movement. By adjusting the cam profiles and timing, I was able to coordinate the motion between the different parts.</li>
+          <li><strong>CAD Modeling:</strong> I modeled the components digitally before construction to test spacing, clearances, and axle placement. Creating the CAD model helped me identify alignment issues before building the physical prototype.</li>
+          <li><strong>Testing and Improvements:</strong> During testing, friction between moving parts reduced smoothness and caused inconsistent motion. I improved the design by adjusting clearances, reinforcing weak areas, and reducing resistance around the axle and followers.</li>
+        </ol>
+
+        <h4 style="margin-top:14px">Mechanical Systems Used</h4>
+        <ul class="meta">
+          <li>Hand crank connected to a rotating axle</li>
+          <li>Multiple cams with different profiles</li>
+          <li>Cam followers to convert rotational motion into linear motion</li>
+          <li>Linkages that transferred movement to the wings</li>
+          <li>Spring-assisted return motion for smoother movement</li>
+        </ul>
+
+        <h4 style="margin-top:14px">Engineering Challenges</h4>
+        <p>
+          One of the hardest parts of the project was balancing smooth motion with structural stability. Small changes in cam height or follower position noticeably changed how the bird moved. I also learned how friction affects mechanical systems and how alignment and tolerances are important when designing moving assemblies.
+        </p>
+
+        <h4 style="margin-top:14px">What I Learned</h4>
+        <p>
+          This project improved my understanding of cams, motion transfer, mechanical timing, and prototype testing. It also gave me more experience using CAD software to plan moving systems before manufacturing physical parts.
+        </p>
+      </div>
+    </section>
+
+    <section id="drone" class="container" style="margin-top:30px">
+      <div class="panel">
+        <div class="section-label">Reverse Engineering</div>
+        <h3>Drone Work</h3>
+        <p class="meta">I reverse engineered a drone using a dial caliper, modeled it in CAD, and modified the design so it could support an accessory. I chose a top hat accessory because it added personality while still fitting the existing structure.</p>
+
+        <div class="image-row">
+          <img class="model-thumb" src="assets/dronedrawing.png" alt="Drone drawing" data-full="assets/dronedrawing.png">
+          <img class="model-thumb" src="assets/completedrone.png" alt="Completed drone model" data-full="assets/completedrone.png">
+        </div>
+
+        <h4 style="margin-top:14px">Project Focus</h4>
+        <p>
+          The goal of this project was to understand the drone’s visual, functional, and structural qualities, then use that information to design an integrated accessory.
+          I measured the original drone with a dial caliper so I could capture the important dimensions and build an accurate model.
+        </p>
+
+        <h4 style="margin-top:14px">Design Process</h4>
+        <ol>
+          <li><strong>Reverse engineering:</strong> I inspected the drone carefully and recorded measurements for the overall shape, major features, and key connection points.</li>
+          <li><strong>Concept development:</strong> I sketched several accessory ideas and chose the top hat because it matched the drone’s shape and gave the model a more finished look.</li>
+          <li><strong>CAD modeling:</strong> I built the drone model in CAD, then adjusted the top area so the accessory could interface with the assembly cleanly.</li>
+          <li><strong>Assembly planning:</strong> I checked fit, alignment, and clearances so the accessory would not interfere with the drone’s structure.</li>
+          <li><strong>Prototype and refinement:</strong> I used the model to evaluate how the accessory changed the look of the drone and whether the modified geometry still made sense structurally.</li>
+        </ol>
+
+        <h4 style="margin-top:14px">What the Accessory Added</h4>
+        <p>
+          The top hat was designed as a visual accessory that made the drone look more unique while still respecting the original form.
+          It also forced me to think about how an added part connects to an existing product without damaging the base design.
+        </p>
+
+        <h4 style="margin-top:14px">What I Learned</h4>
+        <p>
+          This project improved my ability to measure accurately, model complex parts from real objects, and design around constraints.
+          It also showed me how reverse engineering connects directly to engineering design, because the measurements and observations guided every decision in the CAD model.
+        </p>
+      </div>
+    </section>
+
+    <section id="cad-work" class="container" style="margin-top:30px">
+      <div class="panel">
+        <div class="section-label">CAD Work</div>
         <h3>3D Modeling Work</h3>
         <p class="meta">A small selection of 3D models I designed. Images are stored in the assets folder.</p>
 
         <div class="model-grid">
-          <div class="panel" style="padding:12px">
+          <div class="project-card">
             <h4 style="margin-top:0">Backpack Charm</h4>
             <img class="model-thumb" src="assets/backpackcharm.png" alt="Backpack Charm" data-full="assets/backpackcharm.png">
             <p class="meta" style="margin-top:8px">For the backpack charm I started with a 2D vector outline and imported it into my CAD software as a sketch. Turning the vector into a 3D model required cleaning the curves, creating proper closed profiles, and using extrusion and fillets to get the charm shape. Importing the vector saved time on the initial shape but required careful scaling and alignment so the charm printed at the right size.</p>
             <p class="meta">Lessons learned: how to prepare and clean vector art for CAD imports, how to control scale and export STL settings for 3D printing.</p>
           </div>
 
-          <div class="panel" style="padding:12px">
+          <div class="project-card">
             <h4 style="margin-top:0">Clock Mechanism</h4>
             <img class="model-thumb" src="assets/clockmechanism.png" alt="Clock Mechanism" data-full="assets/clockmechanism.png">
             <p class="meta" style="margin-top:8px">The clock mechanism was a more technical model where I designed gears, shafts, and housing. This project taught me a lot about mirroring extrusions, constraining mates, and thinking about tolerances between moving parts so the gears would mesh properly after printing.</p>
             <p class="meta">Lessons learned: designing for assembly, using mirrored features to keep parts symmetric, and planning tolerances for 3D-printed moving components.</p>
           </div>
         </div>
-
-        <p style="margin-top:12px;color:var(--muted)"></p>
       </div>
     </section>
 
     <section id="skills" class="container" style="margin-top:30px">
-      <div class="panel">
+      <div class="panel skills-panel">
+        <div class="section-label">Toolkit</div>
         <h3>Technical skills</h3>
         <p class="meta">Languages and tools I use.</p>
         <div class="skills" style="margin-top:12px">
-          <div class="skill" tabindex="0">
+          <div class="skill" tabindex="0" role="button" aria-label="Python skill details">
             <img src="assets/python.png" alt="Python icon" onerror="this.style.opacity=0.25">
             <small>Python</small>
             <div class="tooltip">
@@ -245,7 +604,7 @@
             </div>
           </div>
 
-          <div class="skill" tabindex="0">
+          <div class="skill" tabindex="0" role="button" aria-label="HTML and CSS skill details">
             <img src="assets/html.png" alt="HTML icon" onerror="this.style.opacity=0.25">
             <small>HTML &amp; CSS</small>
             <div class="tooltip">
@@ -258,7 +617,7 @@
             </div>
           </div>
 
-          <div class="skill" tabindex="0">
+          <div class="skill" tabindex="0" role="button" aria-label="Lua skill details">
             <img src="assets/lua.png" alt="Lua icon" onerror="this.style.opacity=0.25">
             <small>Lua</small>
             <div class="tooltip">
@@ -271,7 +630,7 @@
             </div>
           </div>
 
-          <div class="skill" tabindex="0">
+          <div class="skill" tabindex="0" role="button" aria-label="C++ skill details">
             <img src="assets/cpp.png" alt="C++ icon" onerror="this.style.opacity=0.25">
             <small>C++</small>
             <div class="tooltip">
@@ -284,7 +643,7 @@
             </div>
           </div>
 
-          <div class="skill" tabindex="0">
+          <div class="skill" tabindex="0" role="button" aria-label="Rust skill details">
             <img src="assets/rust.png" alt="Rust icon" onerror="this.style.opacity=0.25">
             <small>Rust</small>
             <div class="tooltip">
@@ -310,12 +669,12 @@
 
     <section id="contact" class="container" style="margin-top:24px">
       <div class="panel contact-card">
+        <div class="section-label">Reach out</div>
         <h3 style="margin-top:0">Contact</h3>
         <p class="meta">Email: <a href="mailto:vanduynetheodore@gmail.com">vanduynetheodore@gmail.com</a></p>
-        <p style="margin-top:10px;color:var(--muted)">I check this email regularly. If you want to see more details about any project, send me a message and tell me which project you are interested in.</p>
+        <p class="meta" style="margin-top:10px">I check this email regularly. If you want to see more details about any project, send me a message and tell me which project you are interested in.</p>
       </div>
     </section>
-
   </main>
 
   <footer>
@@ -350,19 +709,56 @@
       }
 
       document.querySelectorAll('.model-thumb').forEach(img=>{
+        img.setAttribute('tabindex','0');
         img.addEventListener('click', ()=> open(img.getAttribute('data-full')||img.src, img.alt));
-        img.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') open(img.getAttribute('data-full')||img.src, img.alt); });
+        img.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); open(img.getAttribute('data-full')||img.src, img.alt); } });
       });
 
       closeBtn.addEventListener('click', close);
       lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox) close(); });
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
 
-      document.querySelectorAll('.skill img').forEach(img => {
-        img.addEventListener('click', () => {
-          const parent = img.closest('.skill');
-          if (parent && typeof parent.blur === 'function') parent.blur();
-          else if (document.activeElement && typeof document.activeElement.blur === 'function') document.activeElement.blur();
+      document.querySelectorAll('.skill').forEach(skill => {
+        const toggle = () => {
+          const isOpen = skill.classList.contains('open');
+          document.querySelectorAll('.skill.open').forEach(el => {
+            if (el !== skill) el.classList.remove('open');
+          });
+          skill.classList.toggle('open', !isOpen);
+        };
+
+        skill.addEventListener('click', (e) => {
+          if (e.target.closest('.tooltip')) return;
+          toggle();
+        });
+
+        skill.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+          }
+          if (e.key === 'Escape') {
+            skill.classList.remove('open');
+          }
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.skill')) {
+          document.querySelectorAll('.skill.open').forEach(el => el.classList.remove('open'));
+        }
+      });
+
+      document.querySelectorAll('a.nav-btn[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => {
+          const targetId = link.getAttribute('href').slice(1);
+          const target = document.getElementById(targetId);
+          if (!target) return;
+
+          target.classList.remove('section-glow');
+          void target.offsetWidth;
+          target.classList.add('section-glow');
+          window.setTimeout(() => target.classList.remove('section-glow'), 1300);
         });
       });
     })();
