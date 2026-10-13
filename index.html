@@ -2,355 +2,662 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Theodore Van Duyne — Engineering Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
-    :root{
-      --bg:#0f1216;
-      --bg-2:#14181d;
-      --panel:#171c22;
-      --panel-2:#1b2128;
-      --text:#e9eef4;
-      --muted:#a3adbb;
-      --accent:#9a8f7a;
-      --accent-2:#6f8a83;
-      --border:rgba(255,255,255,0.08);
-      --border-soft:rgba(255,255,255,0.05);
-      --shadow:0 18px 45px rgba(0,0,0,0.35);
-      --shadow-soft:0 10px 24px rgba(0,0,0,0.22);
-      --radius:18px;
-      --max-w:1100px;
+    :root {
+      --bg: #0f1216;
+      --bg-2: #14181d;
+      --panel: #171c22;
+      --panel-2: #1b2128;
+      --text: #e9eef4;
+      --muted: #a3adbb;
+      --accent: #9a8f7a;
+      --accent-2: #6f8a83;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-soft: rgba(255, 255, 255, 0.05);
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+      --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.22);
+      --radius: 18px;
+      --max-w: 1100px;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      line-height:1.6;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+    * {
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      line-height: 1.6;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(154,143,122,0.13), transparent 24%),
-        radial-gradient(circle at top right, rgba(111,138,131,0.12), transparent 20%),
+        radial-gradient(circle at top left, rgba(154, 143, 122, 0.13), transparent 24%),
+        radial-gradient(circle at top right, rgba(111, 138, 131, 0.12), transparent 20%),
         linear-gradient(180deg, #0b0e12 0%, #11161b 45%, #0f1216 100%);
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background-image:linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size:56px 56px;
-      opacity:0.15;
-      mask-image:linear-gradient(180deg, rgba(0,0,0,0.55), transparent 92%);
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: 56px 56px;
+      opacity: 0.15;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 92%);
     }
 
-    ::-webkit-scrollbar{width:10px;height:10px}
-    ::-webkit-scrollbar-track{background:transparent}
-    ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:999px;border:2px solid transparent;background-clip:padding-box}
-    ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.17);border:2px solid transparent;background-clip:padding-box}
-    *{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.1) transparent}
-
-    a{color:#d7d0c2;text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background:rgba(12,15,19,0.75);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(255,255,255,0.05);
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
     }
 
-    .container{max-width:var(--max-w);margin:0 auto;padding:18px 20px}
-
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
+    ::-webkit-scrollbar-track {
+      background: transparent;
     }
 
-    .brand{display:flex;align-items:center;gap:14px;min-width:240px}
-    .title{display:flex;flex-direction:column;gap:3px}
-    .name{font-weight:800;letter-spacing:-0.03em;font-size:1.05rem}
-    .sub{font-size:0.86rem;color:var(--muted)}
-
-    nav{display:flex;gap:8px;flex-wrap:wrap}
-    .nav-btn{
-      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      padding:9px 13px;
-      border-radius:999px;
-      color:var(--text);
-      text-decoration:none;
-      font-weight:600;
-      border:1px solid rgba(255,255,255,0.06);
-      box-shadow:0 6px 16px rgba(0,0,0,0.15);
-      transition:transform .18s ease, border-color .18s ease, background .18s ease;
-    }
-    .nav-btn:hover{
-      transform:translateY(-1px);
-      background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-      border-color:rgba(255,255,255,0.1);
-      text-decoration:none;
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
     }
 
-    main{max-width:var(--max-w);margin:28px auto 0;padding:0 20px 24px}
-
-    .hero{
-      display:grid;
-      grid-template-columns:minmax(0,1.5fr) 320px;
-      gap:18px;
-      align-items:start;
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.17);
+      border: 2px solid transparent;
+      background-clip: padding-box;
     }
 
-    .panel{
-      background:linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
-      border:1px solid var(--border-soft);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow-soft);
-      padding:20px;
-      position:relative;
-      overflow:hidden;
+    a {
+      color: #d7d0c2;
+      text-decoration: none;
     }
 
-    .skills-panel{overflow:visible}
-
-    .panel::after{
-      content:"";
-      position:absolute;
-      inset:auto -20% -40% auto;
-      width:220px;
-      height:220px;
-      background:radial-gradient(circle, rgba(154,143,122,0.08), transparent 65%);
-      pointer-events:none;
+    a:hover {
+      text-decoration: underline;
     }
 
-    .panel + .panel{margin-top:16px}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(12, 15, 19, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-    .section-glow{
-      animation:sectionGlowFade 1.3s ease-out;
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 18px 20px;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 240px;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .name {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 1.05rem;
+    }
+
+    .sub {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+      padding: 9px 13px;
+      border-radius: 999px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+      border-color: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+    }
+
+    main {
+      max-width: var(--max-w);
+      margin: 28px auto 0;
+      padding: 0 20px 24px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) 320px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02));
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skills-panel {
+      overflow: visible;
+    }
+
+    .panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -40% auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(154, 143, 122, 0.08), transparent 65%);
+      pointer-events: none;
+    }
+
+    .panel + .panel {
+      margin-top: 16px;
+    }
+
+    .section-glow {
+      animation: sectionGlowFade 1.3s ease-out;
     }
 
     .section-glow > .panel,
     .section-glow > .project,
-    .section-glow > .project-card{
-      border-color:rgba(154,143,122,0.55) !important;
-      box-shadow:0 0 0 1px rgba(154,143,122,0.25), 0 0 28px rgba(154,143,122,0.28), var(--shadow-soft);
+    .section-glow > .project-card {
+      border-color: rgba(154, 143, 122, 0.55) !important;
+      box-shadow:
+        0 0 0 1px rgba(154, 143, 122, 0.25),
+        0 0 28px rgba(154, 143, 122, 0.28),
+        var(--shadow-soft);
     }
 
-    @keyframes sectionGlowFade{
-      0%{filter:drop-shadow(0 0 0 rgba(154,143,122,0));}
-      18%{filter:drop-shadow(0 0 16px rgba(154,143,122,0.58));}
-      100%{filter:drop-shadow(0 0 0 rgba(154,143,122,0));}
+    @keyframes sectionGlowFade {
+      0% {
+        filter: drop-shadow(0 0 0 rgba(154, 143, 122, 0));
+      }
+
+      18% {
+        filter: drop-shadow(0 0 16px rgba(154, 143, 122, 0.58));
+      }
+
+      100% {
+        filter: drop-shadow(0 0 0 rgba(154, 143, 122, 0));
+      }
     }
 
-    h2,h3,h4{margin:0 0 10px 0;line-height:1.15}
-    h2{font-size:1.55rem;letter-spacing:-0.03em}
-    h3{font-size:1.22rem;letter-spacing:-0.02em}
-    h4{font-size:1rem;letter-spacing:-0.01em}
-
-    .lead{color:#d8dee7;margin:10px 0 0 0;max-width:68ch}
-    .meta{color:var(--muted);font-size:0.96rem}
-
-    section{scroll-margin-top:94px}
-
-    .section-label{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-size:0.78rem;
-      text-transform:uppercase;
-      letter-spacing:0.12em;
-      color:#bdc6d1;
-      margin-bottom:12px;
-    }
-    .section-label::before{
-      content:"";
-      width:26px;height:1px;background:rgba(255,255,255,0.22)
+    h2,
+    h3,
+    h4 {
+      margin: 0 0 10px;
+      line-height: 1.15;
     }
 
-    .contact-card{padding:18px}
-
-    .projects{margin-top:22px;display:grid;gap:18px}
-    .project{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) 290px;
-      gap:16px;
-      padding:18px;
-      border-radius:20px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      border:1px solid rgba(255,255,255,0.05);
-      box-shadow:var(--shadow-soft);
+    h2 {
+      font-size: 1.55rem;
+      letter-spacing: -0.03em;
     }
 
-    .project h3{margin-bottom:8px}
-    .project p{margin-top:0}
-
-    .table-wrap{overflow-x:auto;overflow-y:hidden;border-radius:12px;-webkit-overflow-scrolling:touch;padding-bottom:6px}
-    table{
-      width:100%;
-      border-collapse:separate;
-      border-spacing:0;
-      margin-top:8px;
-      font-size:0.95rem;
-      min-width:720px;
-      overflow:hidden;
-      border-radius:12px;
-    }
-    th,td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:left;vertical-align:top;white-space:normal;word-break:break-word}
-    th{background:rgba(255,255,255,0.03);font-size:0.9rem;color:#edf2f7}
-    tbody tr:hover td{background:rgba(255,255,255,0.015)}
-    tbody tr:last-child td{border-bottom:none}
-
-    .model-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-    .project-card{
-      border-radius:16px;
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.05);
-      padding:13px;
-      box-shadow:0 10px 28px rgba(0,0,0,0.18);
+    h3 {
+      font-size: 1.22rem;
+      letter-spacing: -0.02em;
     }
 
-    .model-thumb{
-      width:100%;
-      aspect-ratio:1/1;
-      object-fit:cover;
-      border-radius:14px;
-      cursor:pointer;
-      display:block;
-      border:1px solid rgba(255,255,255,0.05);
-      box-shadow:0 10px 22px rgba(0,0,0,0.35);
-      transition:transform .16s ease, box-shadow .16s ease;
-      background:rgba(255,255,255,0.02);
+    h4 {
+      font-size: 1rem;
+      letter-spacing: -0.01em;
     }
-    .model-thumb:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 14px 30px rgba(0,0,0,0.42)}
 
-    .skills{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-    .skill{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:8px;
-      padding:13px 12px;
-      border-radius:16px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      border:1px solid rgba(255,255,255,0.05);
-      width:118px;
-      position:relative;
-      box-shadow:0 10px 18px rgba(0,0,0,0.16);
-      cursor:pointer;
-      outline:none;
-      user-select:none;
+    .lead {
+      color: #d8dee7;
+      margin: 10px 0 0;
+      max-width: 68ch;
     }
-    .skill img{width:46px;height:46px;object-fit:contain;filter:saturate(0.95)}
-    .skill small{color:#dce2ea;font-weight:700;letter-spacing:0.01em;text-align:center}
 
-    .skill .tooltip{
-      position:absolute;
-      bottom:calc(100% + 10px);
-      left:50%;
-      transform:translateX(-50%) translateY(8px);
-      opacity:0;
-      visibility:hidden;
-      transition:opacity .18s ease, transform .18s ease;
-      background:var(--panel-2);
-      padding:12px 13px;
-      border-radius:14px;
-      width:245px;
-      border:1px solid rgba(255,255,255,0.06);
-      box-shadow:0 14px 28px rgba(0,0,0,0.38);
-      color:var(--text);
-      font-size:0.86rem;
-      text-align:left;
-      z-index:30;
-      pointer-events:none;
+    .meta {
+      color: var(--muted);
+      font-size: 0.96rem;
     }
+
+    section {
+      scroll-margin-top: 94px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #bdc6d1;
+      margin-bottom: 12px;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .contact-card {
+      padding: 18px;
+    }
+
+    .projects {
+      margin-top: 22px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 290px;
+      gap: 16px;
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .project h3 {
+      margin-bottom: 8px;
+    }
+
+    .project p {
+      margin-top: 0;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-radius: 12px;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 8px;
+      font-size: 0.95rem;
+      min-width: 720px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.9rem;
+      color: #edf2f7;
+    }
+
+    tbody tr:hover td {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .model-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .project-card {
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 13px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .model-thumb {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 14px;
+      cursor: pointer;
+      display: block;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .model-thumb:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
+    }
+
+    .skills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .skill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 12px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      width: 118px;
+      position: relative;
+      box-shadow: 0 10px 18px rgba(0, 0, 0, 0.16);
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+    }
+
+    .skill img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      filter: saturate(0.95);
+    }
+
+    .skill small {
+      color: #dce2ea;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-align: center;
+    }
+
+    .skill .tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      background: var(--panel-2);
+      padding: 12px 13px;
+      border-radius: 14px;
+      width: 245px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.38);
+      color: var(--text);
+      font-size: 0.86rem;
+      text-align: left;
+      z-index: 30;
+      pointer-events: none;
+    }
+
     .skill:hover .tooltip,
     .skill:focus-within .tooltip,
-    .skill.open .tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
-    .skill .tooltip::after{
-      content:'';
-      position:absolute;
-      top:100%;left:50%;transform:translateX(-50%);
-      border-width:8px;
-      border-style:solid;
-      border-color:var(--panel-2) transparent transparent transparent
-    }
-    .skill ul{margin:8px 0 0 18px;padding:0}
-    .skill li{margin:4px 0}
-
-    .contact-card p{margin-bottom:0}
-
-    .lightbox{
-      position:fixed;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(2,6,10,0.86);
-      visibility:hidden;
-      opacity:0;
-      transition:opacity .18s ease;
-      z-index:1200;
-      padding:20px;
-    }
-    .lightbox.open{visibility:visible;opacity:1}
-    .lightbox img{max-width:100%;max-height:100%;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,0.75)}
-    .lightbox .close{
-      position:absolute;
-      top:18px;right:18px;
-      background:rgba(255,255,255,0.06);
-      border-radius:999px;
-      padding:10px 12px;
-      cursor:pointer;
-      border:1px solid rgba(255,255,255,0.08);
-      color:var(--text);
+    .skill.open .tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
     }
 
-    footer{
-      max-width:var(--max-w);
-      margin:24px auto 48px auto;
-      padding:10px 20px;
-      color:var(--muted);
-      text-align:center;
-      font-size:0.95rem;
+    .skill .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 8px;
+      border-style: solid;
+      border-color: var(--panel-2) transparent transparent transparent;
     }
 
-    .image-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-    .image-row.single{grid-template-columns:1fr}
+    .skill ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
 
-    @media (max-width: 940px){
-      .hero{grid-template-columns:1fr}
-      .project{grid-template-columns:1fr}
-      .model-grid{grid-template-columns:1fr}
-      .image-row{grid-template-columns:1fr}
-      .skill{width:104px}
-      .skill .tooltip{
-        width:210px;
-        top:calc(100% + 10px);
-        bottom:auto;
+    .skill li {
+      margin: 4px 0;
+    }
+
+    .contact-card p {
+      margin-bottom: 0;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 6, 10, 0.86);
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      z-index: 1200;
+      padding: 20px;
+    }
+
+    .lightbox.open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 14px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.75);
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      padding: 10px 12px;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    footer {
+      max-width: var(--max-w);
+      margin: 24px auto 48px;
+      padding: 10px 20px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .image-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .image-row.single {
+      grid-template-columns: 1fr;
+    }
+
+    /* Tug-of-War Project */
+
+    .tug-photo {
+      max-width: 650px;
+      margin: 18px auto;
+    }
+
+    .tug-photo .model-thumb {
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+    }
+
+    .project-details {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 14px 0;
+    }
+
+    .detail-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(154, 143, 122, 0.1);
+      border: 1px solid rgba(154, 143, 122, 0.2);
+      color: #d7d0c2;
+      font-size: 0.83rem;
+      font-weight: 600;
+    }
+
+    .iteration-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .iteration-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .iteration-card h4 {
+      color: #d7d0c2;
+    }
+
+    .iteration-card p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 940px) {
+      .hero {
+        grid-template-columns: 1fr;
       }
-      .skill .tooltip::after{
-        top:auto;
-        bottom:100%;
-        border-color:transparent transparent var(--panel-2) transparent;
+
+      .project {
+        grid-template-columns: 1fr;
+      }
+
+      .model-grid,
+      .image-row,
+      .iteration-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skill {
+        width: 104px;
+      }
+
+      .skill .tooltip {
+        width: 210px;
+        top: calc(100% + 10px);
+        bottom: auto;
+      }
+
+      .skill .tooltip::after {
+        top: auto;
+        bottom: 100%;
+        border-color: transparent transparent var(--panel-2) transparent;
       }
     }
 
-    @media (max-width: 640px){
-      .container,main{padding-left:14px;padding-right:14px}
-      .panel,.project{border-radius:16px;padding:16px}
-      .nav-btn{padding:8px 11px;font-size:0.92rem}
-      .name{font-size:1rem}
-      .sub{font-size:0.82rem}
+    @media (max-width: 640px) {
+      .container,
+      main {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .panel,
+      .project {
+        border-radius: 16px;
+        padding: 16px;
+      }
+
+      .nav-btn {
+        padding: 8px 11px;
+        font-size: 0.92rem;
+      }
+
+      .name {
+        font-size: 1rem;
+      }
+
+      .sub {
+        font-size: 0.82rem;
+      }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="container">
@@ -358,13 +665,17 @@
         <div class="brand">
           <div class="title">
             <div class="name">Theodore Van Duyne</div>
-            <div class="sub">Little Miami High School • Class of 2029 • Aspiring microprocessor engineer</div>
+            <div class="sub">
+              Little Miami High School • Class of 2029 • Aspiring microprocessor engineer
+            </div>
           </div>
         </div>
+
         <nav>
           <a class="nav-btn" href="#about">About</a>
           <a class="nav-btn" href="#projects">Projects</a>
           <a class="nav-btn" href="#major-projects">Major Projects</a>
+          <a class="nav-btn" href="#tug-of-war">Tug-of-War</a>
           <a class="nav-btn" href="#automata">Automata</a>
           <a class="nav-btn" href="#drone">Drone Work</a>
           <a class="nav-btn" href="#cad-work">3D Modeling Work</a>
@@ -376,77 +687,202 @@
   </header>
 
   <main>
+    <!-- ABOUT -->
     <section id="about" class="container hero">
       <div class="panel">
         <div class="section-label">Introduction</div>
         <h2>About</h2>
-        <p class="lead">Hi, I’m Theodore. This portfolio shows my engineering, coding, and 3-D modeling work, starting with a carnival themed golf game project I built in class.</p>
-        <p class="meta" style="margin-top:12px">I'm focused on electronic engineering and I aspire to be a microprocessor engineer. I enjoy solving problems with math and code, and I like building and testing physical circuits and embedded systems.</p>
 
-        <h4 style="margin-top:14px">What to expect</h4>
-        <p class="meta">You will find well-documented projects that include the problem statement, the steps I took to design and test, and honest reflections on what worked and what I would do differently the next time. I will keep adding new work as I learn more.</p>
+        <p class="lead">
+          Hi, I'm Theodore. This portfolio shows my engineering,
+          coding, and 3-D modeling work, starting with a carnival
+          themed golf game project I built in class.
+        </p>
+
+        <p class="meta" style="margin-top: 12px">
+          I'm focused on electronic engineering and I aspire to be
+          a microprocessor engineer. I enjoy solving problems with
+          math and code, and I like building and testing physical
+          circuits and embedded systems.
+        </p>
+
+        <h4 style="margin-top: 14px">What to expect</h4>
+
+        <p class="meta">
+          You will find well-documented projects that include the
+          problem statement, the steps I took to design and test,
+          and honest reflections on what worked and what I would
+          do differently the next time. I will keep adding new
+          work as I learn more.
+        </p>
       </div>
 
       <aside class="panel contact-card">
         <div class="section-label">Contact</div>
-        <h3 style="margin-top:0">Contact</h3>
-        <p class="meta">Email: <a href="mailto:vanduynetheodore@gmail.com">vanduynetheodore@gmail.com</a></p>
-        <p class="meta" style="margin-top:12px">Want to collaborate or see more details? Email me and include what you want to see.</p>
+        <h3 style="margin-top: 0">Contact</h3>
+
+        <p class="meta">
+          Email:
+          <a href="mailto:vanduynetheodore@gmail.com">
+            vanduynetheodore@gmail.com
+          </a>
+        </p>
+
+        <p class="meta" style="margin-top: 12px">
+          Want to collaborate or see more details?
+          Email me and include what you want to see.
+        </p>
       </aside>
     </section>
 
+    <!-- CARNIVAL GOLF -->
     <section id="projects" class="container projects">
       <div class="project">
         <div>
           <div class="section-label">Featured project</div>
           <h3>Carnival Golf, Windmill Challenge</h3>
-          <p class="meta">Class project. Our team brainstormed three game ideas: an Angry Birds style cork launcher, a Pop-a-Shot style target, and a windmill mini-golf. We picked the windmill game because it was fun, simple to build, and reliable once tuned.</p>
 
-          <h4 style="margin-top:12px">Problem statement</h4>
-          <p>Design a carnival game that fits the booth size, keeps players safe, and gives a fair chance to win. The game had to include a target with a hole that rewards a top prize when a player gets the ball on par, and smaller prizes for scores above par. We used a cork launcher as our power source.</p>
+          <p class="meta">
+            Class project. Our team brainstormed three game ideas:
+            an Angry Birds style cork launcher, a Pop-a-Shot style
+            target, and a windmill mini-golf. We picked the windmill
+            game because it was fun, simple to build, and reliable
+            once tuned.
+          </p>
 
-          <h4 style="margin-top:12px">Design process</h4>
+          <h4 style="margin-top: 12px">Problem statement</h4>
+          <p>
+            Design a carnival game that fits the booth size,
+            keeps players safe, and gives a fair chance to win.
+            The game had to include a target with a hole that
+            rewards a top prize when a player gets the ball on
+            par, and smaller prizes for scores above par.
+            We used a cork launcher as our power source.
+          </p>
+
+          <h4 style="margin-top: 12px">Design process</h4>
           <ol>
-            <li><strong>Ask:</strong> We looked at the booth limits, what size the target board could be, and how consistent the cork launcher was when players used it.</li>
-            <li><strong>Imagine:</strong> Everyone sketched ideas. We compared a cork-based Angry Birds setup, a Pop-a-Shot rebound target, and a windmill-style hole like mini-golf.</li>
-            <li><strong>Plan:</strong> We chose the windmill. We sketched the layout for the booth and the target board, and we estimated where the launcher would be placed and how big the hole should be to give the right difficulty.</li>
-            <li><strong>Create:</strong> We built a prototype out of poster board and cardboard. We tested launches and watched how the ball moved through the windmill blades and landed in the hole or scoring zones.</li>
-            <li><strong>Improve:</strong> The prototype showed two main problems: the base was not stable enough, and the hole needed smoothing so the ball would not jam. We reinforced the base with extra bracing and adjusted the hole edges to improve reliability.</li>
+            <li>
+              <strong>Ask:</strong>
+              We looked at the booth limits, what size the target
+              board could be, and how consistent the cork launcher
+              was when players used it.
+            </li>
+            <li>
+              <strong>Imagine:</strong>
+              Everyone sketched ideas. We compared a cork-based
+              Angry Birds setup, a Pop-a-Shot rebound target,
+              and a windmill-style hole like mini-golf.
+            </li>
+            <li>
+              <strong>Plan:</strong>
+              We chose the windmill. We sketched the layout for
+              the booth and the target board, and we estimated
+              where the launcher would be placed and how big
+              the hole should be to give the right difficulty.
+            </li>
+            <li>
+              <strong>Create:</strong>
+              We built a prototype out of poster board and cardboard.
+              We tested launches and watched how the ball moved
+              through the windmill blades and landed in the hole
+              or scoring zones.
+            </li>
+            <li>
+              <strong>Improve:</strong>
+              The prototype showed two main problems: the base
+              was not stable enough, and the hole needed smoothing
+              so the ball would not jam. We reinforced the base
+              with extra bracing and adjusted the hole edges
+              to improve reliability.
+            </li>
           </ol>
 
-          <h4 style="margin-top:12px">Rules and scoring</h4>
-          <p>Players get up to three attempts per play. If a player gets the ball through the windmill hole on par, they win the largest prize. Any score above par gets a smaller prize. The attendant retrieves balls that fall through the hole.</p>
+          <h4 style="margin-top: 12px">Rules and scoring</h4>
+          <p>
+            Players get up to three attempts per play.
+            If a player gets the ball through the windmill
+            hole on par, they win the largest prize.
+            Any score above par gets a smaller prize.
+            The attendant retrieves balls that fall through the hole.
+          </p>
 
-          <h4 style="margin-top:12px">Reflection</h4>
-          <p>What worked: the windmill design was engaging and easy for players to understand, and small changes to the base increased reliability a lot. What to improve: collect more test data to fine tune hole size and position, and experiment with blade shape so the timing of openings is more forgiving.</p>
+          <h4 style="margin-top: 12px">Reflection</h4>
+          <p>
+            What worked: the windmill design was engaging and easy
+            for players to understand, and small changes to the
+            base increased reliability a lot. What to improve:
+            collect more test data to fine tune hole size and
+            position, and experiment with blade shape so the
+            timing of openings is more forgiving.
+          </p>
         </div>
 
         <aside>
-          <div class="panel" style="margin-bottom:12px;padding:16px;border-radius:16px">
-            <h4 style="margin:0 0 8px 0">Decision matrix</h4>
+          <div class="panel" style="margin-bottom: 12px; padding: 16px; border-radius: 16px">
+            <h4 style="margin: 0 0 8px">Decision matrix</h4>
             <div class="table-wrap">
               <table>
-                <thead><tr><th style="width:45%">Criteria</th><th style="width:18%">Windmill</th><th style="width:18%">Angry Birds</th><th style="width:18%">Pop-a-Shot</th></tr></thead>
+                <thead>
+                  <tr>
+                    <th>Criteria</th>
+                    <th>Windmill</th>
+                    <th>Angry Birds</th>
+                    <th>Pop-a-Shot</th>
+                  </tr>
+                </thead>
                 <tbody>
-                  <tr><td>Player fun</td><td>8</td><td>7</td><td>6</td></tr>
-                  <tr><td>Build difficulty</td><td>6</td><td>7</td><td>5</td></tr>
-                  <tr><td>Reliability in tests</td><td>7</td><td>5</td><td>6</td></tr>
-                  <tr><td>Ease of retrieving balls</td><td>9</td><td>6</td><td>7</td></tr>
-                  <tr><td><strong>Total</strong></td><td><strong>30</strong></td><td><strong>25</strong></td><td><strong>24</strong></td></tr>
+                  <tr>
+                    <td>Player fun</td>
+                    <td>8</td>
+                    <td>7</td>
+                    <td>6</td>
+                  </tr>
+                  <tr>
+                    <td>Build difficulty</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td>Reliability in tests</td>
+                    <td>7</td>
+                    <td>5</td>
+                    <td>6</td>
+                  </tr>
+                  <tr>
+                    <td>Ease of retrieving balls</td>
+                    <td>9</td>
+                    <td>6</td>
+                    <td>7</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>30</strong></td>
+                    <td><strong>25</strong></td>
+                    <td><strong>24</strong></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
 
-          <div class="panel" style="text-align:left;padding:16px;border-radius:16px">
-            <h4 style="margin-top:0">Prototype notes</h4>
-            <p class="meta">Prototype materials included poster board, cardboard, and tape. The cork launcher gave consistent energy once we adjusted the stopper height. Reinforcing the base removed wobble and made the game feel solid for players.</p>
+          <div class="panel" style="text-align: left; padding: 16px; border-radius: 16px">
+            <h4 style="margin-top: 0">Prototype notes</h4>
+            <p class="meta">
+              Prototype materials included poster board, cardboard,
+              and tape. The cork launcher gave consistent energy
+              once we adjusted the stopper height. Reinforcing
+              the base removed wobble and made the game feel
+              solid for players.
+            </p>
           </div>
         </aside>
       </div>
     </section>
 
-    <section id="major-projects" class="container" style="margin-top:30px">
+    <!-- MAJOR PROJECTS -->
+    <section id="major-projects" class="container" style="margin-top: 30px">
       <div class="panel">
         <div class="section-label">Larger work</div>
         <h3>Major Projects</h3>
@@ -454,53 +890,379 @@
 
         <div class="model-grid">
           <div class="project-card">
-            <h4 style="margin-top:0">Custom Clock Model</h4>
-            <img class="model-thumb" src="assets/clockmodel.png" alt="Custom clock model" data-full="assets/clockmodel.png">
-            <p class="meta" style="margin-top:8px">
-              Modeling my custom clock challenged me to work within constraints and model efficiently while solving problems with tolerances.
-              Because the design included moving components, I had to carefully plan fits and clearances so things would fit perfectly after manufacturing.
-              This project improved my CAD workflow, taught me to think about assembly from the start, and showed how small tolerance changes affect the mechanism's performance.
+            <h4 style="margin-top: 0">Custom Clock Model</h4>
+            <img
+              class="model-thumb"
+              src="assets/clockmodel.png"
+              alt="Custom clock model"
+              data-full="assets/clockmodel.png"
+            >
+            <p class="meta" style="margin-top: 8px">
+              Modeling my custom clock challenged me to work
+              within constraints and model efficiently while
+              solving problems with tolerances.
+
+              Because the design included moving components,
+              I had to carefully plan fits and clearances so
+              things would fit perfectly after manufacturing.
+
+              This project improved my CAD workflow, taught me
+              to think about assembly from the start, and showed
+              how small tolerance changes affect the mechanism's
+              performance.
             </p>
           </div>
 
           <div class="project-card">
-            <h4 style="margin-top:0">Balancing Sculpture</h4>
-            <img class="model-thumb" src="assets/balancing.png" alt="Balancing sculpture" data-full="assets/balancing.png">
-            <p class="meta" style="margin-top:8px">
-              This project taught me how to use the laser engraver and how to use center of mass to balance things.
-              By adjusting shapes and weight distribution and making precise cuts on the laser, I was able to create parts that combined into a stable balancing piece that rests at a single point.
-              The work reinforced the importance of precise cuts and testing when tuning balance and stability.
+            <h4 style="margin-top: 0">Balancing Sculpture</h4>
+            <img
+              class="model-thumb"
+              src="assets/balancing.png"
+              alt="Balancing sculpture"
+              data-full="assets/balancing.png"
+            >
+            <p class="meta" style="margin-top: 8px">
+              This project taught me how to use the laser engraver
+              and how to use center of mass to balance things.
+
+              By adjusting shapes and weight distribution and
+              making precise cuts on the laser, I was able to
+              create parts that combined into a stable balancing
+              piece that rests at a single point.
+
+              The work reinforced the importance of precise
+              cuts and testing when tuning balance and stability.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="automata" class="container" style="margin-top:30px">
+    <!-- VEX V5 TUG OF WAR -->
+    <section id="tug-of-war" class="container" style="margin-top: 30px">
+      <div class="panel">
+        <div class="section-label">Robotics &amp; Mechanical Engineering</div>
+        <h3>VEX V5 Tug-of-War Challenge</h3>
+
+        <p class="meta">
+          For this project, I designed and built a robot
+          intended to maximize pulling force in a tug-of-war
+          competition. I experimented with different gear ratios,
+          motor configurations, and weight to understand how
+          these factors affected the robot's performance.
+        </p>
+
+        <div class="project-details">
+          <span class="detail-tag">VEX V5</span>
+          <span class="detail-tag">Mechanical Design</span>
+          <span class="detail-tag">Gearing &amp; Torque</span>
+          <span class="detail-tag">Independent Project</span>
+        </div>
+
+        <!-- ROBOT PHOTO -->
+        <div class="tug-photo">
+          <img
+            class="model-thumb"
+            src="assets/slow_car.png"
+            alt="VEX V5 Tug-of-War robot"
+            data-full="assets/slow_car.png"
+          >
+        </div>
+
+        <!-- PROJECT GOAL -->
+        <h4 style="margin-top: 20px">Project Goal</h4>
+        <p>
+          The goal of this challenge was to design and construct
+          a VEX robot capable of pulling an opposing robot
+          across a centerline. The robot could only use two
+          VEX Motors, meaning the mechanical design
+          had to make efficient use of the available power.
+        </p>
+        <p>
+          To improve pulling force, I needed to consider the
+          relationship between torque, speed, gearing, mass,
+          and friction. I also needed to make adjustments to
+          the robot based on its performance during testing.
+        </p>
+
+        <!-- INITIAL DESIGN -->
+        <h4 style="margin-top: 20px">Initial Design</h4>
+        <p>
+          My initial robot used a three-wheel design with two
+          powered wheels in the back and one freely rotating
+          wheel in the center for support.
+        </p>
+        <p>
+          I started with a torque-focused motor configuration
+          and a 1:3 gear ratio intended to increase the speed
+          of the wheels. My idea was to experiment with how
+          changing the gear ratio would affect the robot's
+          ability to move and pull against resistance.
+        </p>
+        <p>
+          I kept the overall design relatively simple so that
+          I could modify the drivetrain without completely
+          rebuilding the robot.
+        </p>
+
+        <!-- DESIGN PROCESS -->
+        <h4 style="margin-top: 20px">Engineering Design Process</h4>
+        <ol>
+          <li>
+            <strong>Ask:</strong>
+            I examined the requirements for the tug-of-war
+            competition and considered how torque, speed,
+            mass, and friction would affect the robot's
+            pulling ability. The main challenge was producing
+            enough force to pull another robot using only
+            two motors.
+          </li>
+          <li>
+            <strong>Imagine:</strong>
+            I decided on a three-wheel configuration with
+            two powered rear wheels and one freely rotating
+            center wheel. I wanted to use gearing to change
+            the drivetrain's speed and torque.
+          </li>
+          <li>
+            <strong>Plan:</strong>
+            I planned the drivetrain around the two powered
+            wheels and selected a 1:3 gear ratio to increase
+            wheel speed. I also considered how the robot's
+            weight could affect its traction.
+          </li>
+          <li>
+            <strong>Create:</strong>
+            I assembled the robot using VEX V5 components
+            and connected the motors to the drivetrain.
+            After constructing the initial prototype,
+            I tested how it operated.
+          </li>
+          <li>
+            <strong>Improve:</strong>
+            I changed the gear ratio, modified the motor
+            configuration, and added weight to the robot.
+            These changes were intended to improve its
+            performance, but the final design did not
+            demonstrate a noticeable improvement.
+          </li>
+        </ol>
+
+        <!-- ITERATIONS -->
+        <h4 style="margin-top: 20px">Design Changes and Iterations</h4>
+        <p>
+          After constructing the initial robot, I made
+          modifications to the drivetrain to see whether
+          changing the mechanical setup would improve
+          its performance.
+        </p>
+
+        <div class="iteration-grid">
+          <div class="iteration-card">
+            <h4>Initial Prototype</h4>
+            <p>
+              The first version used three wheels, with
+              two powered rear wheels and one center wheel
+              that rotated freely. I used a torque motor
+              configuration and a 1:3 gear ratio intended
+              to increase speed.
+            </p>
+          </div>
+
+          <div class="iteration-card">
+            <h4>Modified Prototype</h4>
+            <p>
+              I changed the gear ratio to adjust the
+              drivetrain's speed, modified the motor
+              configuration, and added weight. These
+              changes affected the robot's operation
+              but did not noticeably improve its
+              performance in the competition.
+            </p>
+          </div>
+        </div>
+
+        <!-- ENGINEERING CONCEPTS -->
+        <h4 style="margin-top: 20px">Engineering Concepts</h4>
+        <p>
+          <strong>Gearing:</strong>
+          Gear ratios affect the relationship between
+          rotational speed and torque. Increasing the
+          output speed of a drivetrain generally reduces
+          the available output torque. In tug-of-war,
+          having more torque can help the robot pull
+          against resistance.
+        </p>
+        <p>
+          <strong>Mass:</strong>
+          Adding weight can help increase the force
+          between the wheels and the ground. This
+          can improve traction and reduce wheel
+          slipping, although additional weight also
+          increases the mass the motors must move.
+        </p>
+        <p>
+          <strong>Friction:</strong>
+          Friction between the wheels and the ground
+          determines how much pulling force the robot
+          can transfer without slipping. A robot
+          with insufficient traction may struggle
+          to pull effectively even if its motors
+          can produce enough torque.
+        </p>
+
+        <!-- TEST RESULTS -->
+        <h4 style="margin-top: 20px">Testing and Competition Results</h4>
+        <p>
+          During the tug-of-war competition, my robot
+          competed against another vehicle, and the
+          match ended in a tie.
+        </p>
+        <p>
+          Although I made changes to the robot's gearing,
+          weight, and motor configuration, the final
+          design did not perform noticeably better
+          than the original prototype.
+        </p>
+        <p>
+          The results showed me that changing a design
+          does not automatically improve its performance.
+          In particular, increasing drivetrain speed
+          may reduce the torque available for pulling,
+          making a faster configuration less effective
+          for a tug-of-war challenge.
+        </p>
+
+        <!-- CHALLENGES -->
+        <h4 style="margin-top: 20px">Engineering Challenges</h4>
+        <p>
+          The biggest challenge I encountered was
+          changing the gear ratio. Modifying the
+          gearing required adjustments to the drivetrain,
+          which made the process more difficult than
+          simply changing the robot's weight.
+        </p>
+        <p>
+          I also had to consider how the gear ratio
+          affected the balance between speed and torque.
+          While increasing speed can be useful in
+          other types of robotics competitions,
+          tug-of-war places more importance on
+          producing enough pulling force.
+        </p>
+
+        <!-- REFLECTION -->
+        <h4 style="margin-top: 20px">Reflection</h4>
+        <p>
+          This project helped me better understand
+          how gear ratios, torque, mass, and friction
+          affect a robot's performance. Although my
+          robot managed to tie during the competition,
+          the changes I made did not improve its
+          performance as much as I expected.
+        </p>
+        <p>
+          If I repeated this challenge, I would
+          use a different gear ratio that focuses
+          more on increasing torque instead of
+          speed. Since the purpose of tug-of-war
+          is to pull against another robot,
+          prioritizing torque would likely be
+          more effective than increasing the
+          drivetrain's maximum speed.
+        </p>
+        <p>
+          I completed this project independently,
+          which gave me experience making my own
+          design decisions, constructing the robot,
+          and troubleshooting mechanical problems.
+        </p>
+        <p>
+          Overall, I learned that a faster drivetrain
+          is not necessarily a stronger drivetrain.
+          Understanding the mechanical advantages
+          and disadvantages of different configurations
+          is important when designing a robot
+          for a specific purpose.
+        </p>
+      </div>
+    </section>
+
+    <!-- AUTOMATA -->
+    <section id="automata" class="container" style="margin-top: 30px">
       <div class="panel">
         <div class="section-label">Mechanical Design</div>
         <h3>Automata Design Challenge</h3>
-        <p class="meta">For this project, I designed and built a hand-cranked automaton that used cams and mechanical linkages to create motion. My design was a bird whose wings moved opposite to the motion of its body, creating a more lifelike and interesting animation.</p>
-
-        <div class="image-row single">
-          <img class="model-thumb" src="assets/birddrawing.png" alt="Bird automata drawing" data-full="assets/birddrawing.png">
-        </div>
-
-        <h4 style="margin-top:14px">Project Goal</h4>
-        <p>
-          The objective was to create a mechanical toy for children ages 5–12 that used rotational motion from a hand crank to drive multiple moving parts. The project required the use of cams, an axle system, and additional mechanisms to translate motion into a short animated scene.
+        <p class="meta">
+          For this project, I designed and built a hand-cranked
+          automaton that used cams and mechanical linkages to
+          create motion. My design was a bird whose wings
+          moved opposite to the motion of its body,
+          creating a more lifelike and interesting animation.
         </p>
 
-        <h4 style="margin-top:14px">Design Process</h4>
+        <div class="image-row single">
+          <img
+            class="model-thumb"
+            src="assets/birddrawing.png"
+            alt="Bird automata drawing"
+            data-full="assets/birddrawing.png"
+          >
+        </div>
+
+        <h4 style="margin-top: 14px">Project Goal</h4>
+        <p>
+          The objective was to create a mechanical toy for
+          children ages 5–12 that used rotational motion
+          from a hand crank to drive multiple moving parts.
+
+          The project required the use of cams, an axle
+          system, and additional mechanisms to translate
+          motion into a short animated scene.
+        </p>
+
+        <h4 style="margin-top: 14px">Design Process</h4>
         <ol>
-          <li><strong>Brainstorming:</strong> I explored several ideas before choosing a bird design because it allowed me to experiment with synchronized but opposite movements.</li>
-          <li><strong>Planning Motion:</strong> I planned the movement so that when the crank rotated, the bird’s body would rise while the wings moved downward. This opposing motion made the automaton feel more dynamic and realistic.</li>
-          <li><strong>Cam Design:</strong> I used multiple cam shapes to create different movement patterns. One cam controlled the vertical motion of the bird’s body while another controlled the wing movement. By adjusting the cam profiles and timing, I was able to coordinate the motion between the different parts.</li>
-          <li><strong>CAD Modeling:</strong> I modeled the components digitally before construction to test spacing, clearances, and axle placement. Creating the CAD model helped me identify alignment issues before building the physical prototype.</li>
-          <li><strong>Testing and Improvements:</strong> During testing, friction between moving parts reduced smoothness and caused inconsistent motion. I improved the design by adjusting clearances, reinforcing weak areas, and reducing resistance around the axle and followers.</li>
+          <li>
+            <strong>Brainstorming:</strong>
+            I explored several ideas before choosing a bird
+            design because it allowed me to experiment with
+            synchronized but opposite movements.
+          </li>
+          <li>
+            <strong>Planning Motion:</strong>
+            I planned the movement so that when the crank
+            rotated, the bird's body would rise while the
+            wings moved downward. This opposing motion made
+            the automaton feel more dynamic and realistic.
+          </li>
+          <li>
+            <strong>Cam Design:</strong>
+            I used multiple cam shapes to create different
+            movement patterns. One cam controlled the vertical
+            motion of the bird's body while another controlled
+            the wing movement. By adjusting the cam profiles
+            and timing, I was able to coordinate the motion
+            between the different parts.
+          </li>
+          <li>
+            <strong>CAD Modeling:</strong>
+            I modeled the components digitally before construction
+            to test spacing, clearances, and axle placement.
+            Creating the CAD model helped me identify alignment
+            issues before building the physical prototype.
+          </li>
+          <li>
+            <strong>Testing and Improvements:</strong>
+            During testing, friction between moving parts reduced
+            smoothness and caused inconsistent motion. I improved
+            the design by adjusting clearances, reinforcing weak
+            areas, and reducing resistance around the axle
+            and followers.
+          </li>
         </ol>
 
-        <h4 style="margin-top:14px">Mechanical Systems Used</h4>
+        <h4 style="margin-top: 14px">Mechanical Systems Used</h4>
         <ul class="meta">
           <li>Hand crank connected to a rotating axle</li>
           <li>Multiple cams with different profiles</li>
@@ -509,90 +1271,207 @@
           <li>Spring-assisted return motion for smoother movement</li>
         </ul>
 
-        <h4 style="margin-top:14px">Engineering Challenges</h4>
+        <h4 style="margin-top: 14px">Engineering Challenges</h4>
         <p>
-          One of the hardest parts of the project was balancing smooth motion with structural stability. Small changes in cam height or follower position noticeably changed how the bird moved. I also learned how friction affects mechanical systems and how alignment and tolerances are important when designing moving assemblies.
+          One of the hardest parts of the project was balancing
+          smooth motion with structural stability. Small changes
+          in cam height or follower position noticeably changed
+          how the bird moved.
+
+          I also learned how friction affects mechanical systems
+          and how alignment and tolerances are important when
+          designing moving assemblies.
         </p>
 
-        <h4 style="margin-top:14px">What I Learned</h4>
+        <h4 style="margin-top: 14px">What I Learned</h4>
         <p>
-          This project improved my understanding of cams, motion transfer, mechanical timing, and prototype testing. It also gave me more experience using CAD software to plan moving systems before manufacturing physical parts.
+          This project improved my understanding of cams,
+          motion transfer, mechanical timing, and prototype
+          testing. It also gave me more experience using CAD
+          software to plan moving systems before manufacturing
+          physical parts.
         </p>
       </div>
     </section>
 
-    <section id="drone" class="container" style="margin-top:30px">
+    <!-- DRONE WORK -->
+    <section id="drone" class="container" style="margin-top: 30px">
       <div class="panel">
         <div class="section-label">Reverse Engineering</div>
         <h3>Drone Work</h3>
-        <p class="meta">I reverse engineered a drone using a dial caliper, modeled it in CAD, and modified the design so it could support an accessory. I chose a top hat accessory because it added personality while still fitting the existing structure.</p>
+        <p class="meta">
+          I reverse engineered a drone using a dial caliper,
+          modeled it in CAD, and modified the design so it
+          could support an accessory.
+
+          I chose a top hat accessory because it added
+          personality while still fitting the existing structure.
+        </p>
 
         <div class="image-row">
-          <img class="model-thumb" src="assets/dronedrawing.png" alt="Drone drawing" data-full="assets/dronedrawing.png">
-          <img class="model-thumb" src="assets/completedrone.png" alt="Completed drone model" data-full="assets/completedrone.png">
+          <img
+            class="model-thumb"
+            src="assets/dronedrawing.png"
+            alt="Drone drawing"
+            data-full="assets/dronedrawing.png"
+          >
+          <img
+            class="model-thumb"
+            src="assets/completedrone.png"
+            alt="Completed drone model"
+            data-full="assets/completedrone.png"
+          >
         </div>
 
-        <h4 style="margin-top:14px">Project Focus</h4>
+        <h4 style="margin-top: 14px">Project Focus</h4>
         <p>
-          The goal of this project was to understand the drone’s visual, functional, and structural qualities, then use that information to design an integrated accessory.
-          I measured the original drone with a dial caliper so I could capture the important dimensions and build an accurate model.
+          The goal of this project was to understand the drone's
+          visual, functional, and structural qualities, then use
+          that information to design an integrated accessory.
+
+          I measured the original drone with a dial caliper
+          so I could capture the important dimensions and
+          build an accurate model.
         </p>
 
-        <h4 style="margin-top:14px">Design Process</h4>
+        <h4 style="margin-top: 14px">Design Process</h4>
         <ol>
-          <li><strong>Reverse engineering:</strong> I inspected the drone carefully and recorded measurements for the overall shape, major features, and key connection points.</li>
-          <li><strong>Concept development:</strong> I sketched several accessory ideas and chose the top hat because it matched the drone’s shape and gave the model a more finished look.</li>
-          <li><strong>CAD modeling:</strong> I built the drone model in CAD, then adjusted the top area so the accessory could interface with the assembly cleanly.</li>
-          <li><strong>Assembly planning:</strong> I checked fit, alignment, and clearances so the accessory would not interfere with the drone’s structure.</li>
-          <li><strong>Prototype and refinement:</strong> I used the model to evaluate how the accessory changed the look of the drone and whether the modified geometry still made sense structurally.</li>
+          <li>
+            <strong>Reverse engineering:</strong>
+            I inspected the drone carefully and recorded
+            measurements for the overall shape, major
+            features, and key connection points.
+          </li>
+          <li>
+            <strong>Concept development:</strong>
+            I sketched several accessory ideas and chose
+            the top hat because it matched the drone's
+            shape and gave the model a more finished look.
+          </li>
+          <li>
+            <strong>CAD modeling:</strong>
+            I built the drone model in CAD, then adjusted
+            the top area so the accessory could interface
+            with the assembly cleanly.
+          </li>
+          <li>
+            <strong>Assembly planning:</strong>
+            I checked fit, alignment, and clearances so
+            the accessory would not interfere with
+            the drone's structure.
+          </li>
+          <li>
+            <strong>Prototype and refinement:</strong>
+            I used the model to evaluate how the accessory
+            changed the look of the drone and whether the
+            modified geometry still made sense structurally.
+          </li>
         </ol>
 
-        <h4 style="margin-top:14px">What the Accessory Added</h4>
+        <h4 style="margin-top: 14px">What the Accessory Added</h4>
         <p>
-          The top hat was designed as a visual accessory that made the drone look more unique while still respecting the original form.
-          It also forced me to think about how an added part connects to an existing product without damaging the base design.
+          The top hat was designed as a visual accessory
+          that made the drone look more unique while
+          still respecting the original form.
+
+          It also forced me to think about how an
+          added part connects to an existing product
+          without damaging the base design.
         </p>
 
-        <h4 style="margin-top:14px">What I Learned</h4>
+        <h4 style="margin-top: 14px">What I Learned</h4>
         <p>
-          This project improved my ability to measure accurately, model complex parts from real objects, and design around constraints.
-          It also showed me how reverse engineering connects directly to engineering design, because the measurements and observations guided every decision in the CAD model.
+          This project improved my ability to measure
+          accurately, model complex parts from real
+          objects, and design around constraints.
+
+          It also showed me how reverse engineering
+          connects directly to engineering design,
+          because the measurements and observations
+          guided every decision in the CAD model.
         </p>
       </div>
     </section>
 
-    <section id="cad-work" class="container" style="margin-top:30px">
+    <!-- CAD WORK -->
+    <section id="cad-work" class="container" style="margin-top: 30px">
       <div class="panel">
         <div class="section-label">CAD Work</div>
         <h3>3D Modeling Work</h3>
-        <p class="meta">A small selection of 3D models I designed. Images are stored in the assets folder.</p>
+        <p class="meta">
+          A small selection of 3D models I designed.
+          Images are stored in the assets folder.
+        </p>
 
         <div class="model-grid">
           <div class="project-card">
-            <h4 style="margin-top:0">Backpack Charm</h4>
-            <img class="model-thumb" src="assets/backpackcharm.png" alt="Backpack Charm" data-full="assets/backpackcharm.png">
-            <p class="meta" style="margin-top:8px">For the backpack charm I started with a 2D vector outline and imported it into my CAD software as a sketch. Turning the vector into a 3D model required cleaning the curves, creating proper closed profiles, and using extrusion and fillets to get the charm shape. Importing the vector saved time on the initial shape but required careful scaling and alignment so the charm printed at the right size.</p>
-            <p class="meta">Lessons learned: how to prepare and clean vector art for CAD imports, how to control scale and export STL settings for 3D printing.</p>
+            <h4 style="margin-top: 0">Backpack Charm</h4>
+            <img
+              class="model-thumb"
+              src="assets/backpackcharm.png"
+              alt="Backpack Charm"
+              data-full="assets/backpackcharm.png"
+            >
+            <p class="meta" style="margin-top: 8px">
+              For the backpack charm I started with a 2D
+              vector outline and imported it into my CAD
+              software as a sketch.
+
+              Turning the vector into a 3D model required
+              cleaning the curves, creating proper closed
+              profiles, and using extrusion and fillets
+              to get the charm shape.
+
+              Importing the vector saved time on the initial
+              shape but required careful scaling and alignment
+              so the charm printed at the right size.
+            </p>
+            <p class="meta">
+              Lessons learned: how to prepare and clean
+              vector art for CAD imports, how to control
+              scale and export STL settings for 3D printing.
+            </p>
           </div>
 
           <div class="project-card">
-            <h4 style="margin-top:0">Clock Mechanism</h4>
-            <img class="model-thumb" src="assets/clockmechanism.png" alt="Clock Mechanism" data-full="assets/clockmechanism.png">
-            <p class="meta" style="margin-top:8px">The clock mechanism was a more technical model where I designed gears, shafts, and housing. This project taught me a lot about mirroring extrusions, constraining mates, and thinking about tolerances between moving parts so the gears would mesh properly after printing.</p>
-            <p class="meta">Lessons learned: designing for assembly, using mirrored features to keep parts symmetric, and planning tolerances for 3D-printed moving components.</p>
+            <h4 style="margin-top: 0">Clock Mechanism</h4>
+            <img
+              class="model-thumb"
+              src="assets/clockmechanism.png"
+              alt="Clock Mechanism"
+              data-full="assets/clockmechanism.png"
+            >
+            <p class="meta" style="margin-top: 8px">
+              The clock mechanism was a more technical model
+              where I designed gears, shafts, and housing.
+
+              This project taught me a lot about mirroring
+              extrusions, constraining mates, and thinking
+              about tolerances between moving parts so the
+              gears would mesh properly after printing.
+            </p>
+            <p class="meta">
+              Lessons learned: designing for assembly,
+              using mirrored features to keep parts
+              symmetric, and planning tolerances for
+              3D-printed moving components.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="skills" class="container" style="margin-top:30px">
+    <!-- SKILLS -->
+    <section id="skills" class="container" style="margin-top: 30px">
       <div class="panel skills-panel">
         <div class="section-label">Toolkit</div>
         <h3>Technical skills</h3>
         <p class="meta">Languages and tools I use.</p>
-        <div class="skills" style="margin-top:12px">
+
+        <div class="skills" style="margin-top: 12px">
+          <!-- PYTHON -->
           <div class="skill" tabindex="0" role="button" aria-label="Python skill details">
-            <img src="assets/python.png" alt="Python icon" onerror="this.style.opacity=0.25">
+            <img src="assets/python.png" alt="Python icon" onerror="this.style.opacity = 0.25">
             <small>Python</small>
             <div class="tooltip">
               <strong>Skill: Advanced (85%)</strong>
@@ -604,8 +1483,9 @@
             </div>
           </div>
 
+          <!-- HTML -->
           <div class="skill" tabindex="0" role="button" aria-label="HTML and CSS skill details">
-            <img src="assets/html.png" alt="HTML icon" onerror="this.style.opacity=0.25">
+            <img src="assets/html.png" alt="HTML icon" onerror="this.style.opacity = 0.25">
             <small>HTML &amp; CSS</small>
             <div class="tooltip">
               <strong>Skill: Proficient (80%)</strong>
@@ -617,8 +1497,9 @@
             </div>
           </div>
 
+          <!-- LUA -->
           <div class="skill" tabindex="0" role="button" aria-label="Lua skill details">
-            <img src="assets/lua.png" alt="Lua icon" onerror="this.style.opacity=0.25">
+            <img src="assets/lua.png" alt="Lua icon" onerror="this.style.opacity = 0.25">
             <small>Lua</small>
             <div class="tooltip">
               <strong>Skill: Intermediate (70%)</strong>
@@ -630,8 +1511,9 @@
             </div>
           </div>
 
+          <!-- C++ -->
           <div class="skill" tabindex="0" role="button" aria-label="C++ skill details">
-            <img src="assets/cpp.png" alt="C++ icon" onerror="this.style.opacity=0.25">
+            <img src="assets/cpp.png" alt="C++ icon" onerror="this.style.opacity = 0.25">
             <small>C++</small>
             <div class="tooltip">
               <strong>Skill: Intermediate (68%)</strong>
@@ -643,8 +1525,9 @@
             </div>
           </div>
 
+          <!-- RUST -->
           <div class="skill" tabindex="0" role="button" aria-label="Rust skill details">
-            <img src="assets/rust.png" alt="Rust icon" onerror="this.style.opacity=0.25">
+            <img src="assets/rust.png" alt="Rust icon" onerror="this.style.opacity = 0.25">
             <small>Rust</small>
             <div class="tooltip">
               <strong>Skill: Learning (60%)</strong>
@@ -657,8 +1540,13 @@
           </div>
         </div>
 
-        <p style="margin-top:12px;color:var(--muted)">Level notes: I am currently learning more advanced topics in each language and plan to add sample code and project links here as I build more projects.</p>
-        <h4 style="margin-top:12px">Electronics and hardware</h4>
+        <p style="margin-top: 12px; color: var(--muted)">
+          Level notes: I am currently learning more advanced topics
+          in each language and plan to add sample code and project
+          links here as I build more projects.
+        </p>
+
+        <h4 style="margin-top: 12px">Electronics and hardware</h4>
         <ul class="meta">
           <li>Circuit design and breadboarding</li>
           <li>Microcontrollers and embedded systems (Arduino, AVR)</li>
@@ -667,98 +1555,151 @@
       </div>
     </section>
 
-    <section id="contact" class="container" style="margin-top:24px">
+    <!-- CONTACT -->
+    <section id="contact" class="container" style="margin-top: 24px">
       <div class="panel contact-card">
         <div class="section-label">Reach out</div>
-        <h3 style="margin-top:0">Contact</h3>
-        <p class="meta">Email: <a href="mailto:vanduynetheodore@gmail.com">vanduynetheodore@gmail.com</a></p>
-        <p class="meta" style="margin-top:10px">I check this email regularly. If you want to see more details about any project, send me a message and tell me which project you are interested in.</p>
+        <h3 style="margin-top: 0">Contact</h3>
+        <p class="meta">
+          Email:
+          <a href="mailto:vanduynetheodore@gmail.com">
+            vanduynetheodore@gmail.com
+          </a>
+        </p>
+        <p class="meta" style="margin-top: 10px">
+          I check this email regularly. If you want to see
+          more details about any project, send me a message
+          and tell me which project you are interested in.
+        </p>
       </div>
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer>
-    © <span id="year">2025</span> Theodore Van Duyne, Little Miami High School
+    © <span id="year">2026</span> Theodore Van Duyne, Little Miami High School
   </footer>
 
+  <!-- IMAGE LIGHTBOX -->
   <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
     <button class="close" aria-label="Close">✕</button>
-    <img src="" alt="" />
+    <img src="" alt="">
   </div>
 
+  <!-- JAVASCRIPT -->
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    (function(){
-      const lightbox = document.getElementById('lightbox');
-      const lbImg = lightbox.querySelector('img');
-      const closeBtn = lightbox.querySelector('.close');
+    (function () {
+      const lightbox = document.getElementById("lightbox");
+      const lbImg = lightbox.querySelector("img");
+      const closeBtn = lightbox.querySelector(".close");
 
-      function open(src, alt){
+      // Image lightbox
+      function open(src, alt) {
         lbImg.src = src;
-        lbImg.alt = alt || '';
-        lightbox.classList.add('open');
-        lightbox.setAttribute('aria-hidden','false');
-        document.body.style.overflow = 'hidden';
-      }
-      function close(){
-        lightbox.classList.remove('open');
-        lightbox.setAttribute('aria-hidden','true');
-        lbImg.src = '';
-        document.body.style.overflow = '';
+        lbImg.alt = alt || "";
+
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
       }
 
-      document.querySelectorAll('.model-thumb').forEach(img=>{
-        img.setAttribute('tabindex','0');
-        img.addEventListener('click', ()=> open(img.getAttribute('data-full')||img.src, img.alt));
-        img.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); open(img.getAttribute('data-full')||img.src, img.alt); } });
-      });
+      function close() {
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lbImg.src = "";
+        document.body.style.overflow = "";
+      }
 
-      closeBtn.addEventListener('click', close);
-      lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox) close(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+      document.querySelectorAll(".model-thumb").forEach((img) => {
+        img.setAttribute("tabindex", "0");
 
-      document.querySelectorAll('.skill').forEach(skill => {
-        const toggle = () => {
-          const isOpen = skill.classList.contains('open');
-          document.querySelectorAll('.skill.open').forEach(el => {
-            if (el !== skill) el.classList.remove('open');
-          });
-          skill.classList.toggle('open', !isOpen);
-        };
-
-        skill.addEventListener('click', (e) => {
-          if (e.target.closest('.tooltip')) return;
-          toggle();
+        img.addEventListener("click", () => {
+          open(img.getAttribute("data-full") || img.src, img.alt);
         });
 
-        skill.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggle();
-          }
-          if (e.key === 'Escape') {
-            skill.classList.remove('open');
+        img.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            open(img.getAttribute("data-full") || img.src, img.alt);
           }
         });
       });
 
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.skill')) {
-          document.querySelectorAll('.skill.open').forEach(el => el.classList.remove('open'));
+      closeBtn.addEventListener("click", close);
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          close();
         }
       });
 
-      document.querySelectorAll('a.nav-btn[href^="#"]').forEach(link => {
-        link.addEventListener('click', () => {
-          const targetId = link.getAttribute('href').slice(1);
-          const target = document.getElementById(targetId);
-          if (!target) return;
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          close();
+        }
+      });
 
-          target.classList.remove('section-glow');
+      // Skill tooltips
+      document.querySelectorAll(".skill").forEach((skill) => {
+        const toggle = () => {
+          const isOpen = skill.classList.contains("open");
+
+          document.querySelectorAll(".skill.open").forEach((element) => {
+            if (element !== skill) {
+              element.classList.remove("open");
+            }
+          });
+
+          skill.classList.toggle("open", !isOpen);
+        };
+
+        skill.addEventListener("click", (event) => {
+          if (event.target.closest(".tooltip")) {
+            return;
+          }
+
+          toggle();
+        });
+
+        skill.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            toggle();
+          }
+
+          if (event.key === "Escape") {
+            skill.classList.remove("open");
+          }
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest(".skill")) {
+          document.querySelectorAll(".skill.open").forEach((element) => {
+            element.classList.remove("open");
+          });
+        }
+      });
+
+      // Navigation glow animation
+      document.querySelectorAll('a.nav-btn[href^="#"]').forEach((link) => {
+        link.addEventListener("click", () => {
+          const targetId = link.getAttribute("href").slice(1);
+          const target = document.getElementById(targetId);
+
+          if (!target) {
+            return;
+          }
+
+          target.classList.remove("section-glow");
           void target.offsetWidth;
-          target.classList.add('section-glow');
-          window.setTimeout(() => target.classList.remove('section-glow'), 1300);
+          target.classList.add("section-glow");
+
+          window.setTimeout(() => {
+            target.classList.remove("section-glow");
+          }, 1300);
         });
       });
     })();
